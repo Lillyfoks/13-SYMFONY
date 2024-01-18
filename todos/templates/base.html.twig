@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}
+				{{ 'Welcome'|trans }}!
+			{% endblock %}
+		</title>
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+		<script src="https://kit.fontawesome.com/2f3dd775f5.js" crossorigin="anonymous"></script>
+		 {% block stylesheets %}{% endblock %}
+
+		<link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css"> {% block javascripts %}{% endblock %}
+		</head>
+		<body>
+			<header>
+				{% if app.user %}
+					<h1>{{ 'Hello'|trans }}
+						{{ app.user.username }}!</h1>
+					<img id="avatar" src="{{ asset('uploads/brochures/' ~ app.user.brochureFilename) }}" style="min-width:200px"></img>
+				<a href="{{ path('app_logout') }}">{{ 'Logout'|trans }}</a><br>
+			{% else %}
+				<div class="login">
+					<h1>{{ 'Welcome'|trans }}
+					</h1>
+					<p>
+						<a href="{{ path('app_login') }}">{{ 'Login'|trans }}</a>
+						/
+						<a href="{{ path('app_register') }}">{{ 'Register'|trans }}</a>
+					</p>
+				</div>
+			{% endif %}
+		</body>
+	</html>
+</header>
+<main>
+	{% block body %}{% endblock %}
+</main></body></html>
+<footer>
+<h1>Thanks for visiting !</h1>
+</footer>

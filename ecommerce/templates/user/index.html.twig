@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!
+{% endblock %}
+
+{% block body %}
+
+	<div>
+		<p>
+			Identité :
+			{{app.user.firstName}}
+			{{app.user.lastName}}
+		</p>
+	</br>
+	<p>
+		Date de Naissance :
+		{{app.user.birthdate|date('d-m-Y')}}
+	</p>
+</br>
+<p>
+	Email :
+	{{app.user.email}}
+</p></br>{% if app.user.getAdresses()|length > 0 %}
+{% set firstAddress = app.user.getAdresses()|first %}
+<p>
+	Adresse :
+	{{ firstAddress.street }},
+	{{ firstAddress.CP }}
+	{{ firstAddress.City }}
+</p></br>
+<a href="{{ path('app_adress') }}">Modifier mon adresse</a></br>
+
+{% else %}<p>
+Vous n'avez pas encore d'adresse.</p></br><a href="{{ path('app_adress') }}">Ajouter une adresse</a></br>{% endif %}
+
+<a href="{{ path('app_edit_user', {id: app.user.id}) }}">Modifier mes informations</a></div>{% endblock %}

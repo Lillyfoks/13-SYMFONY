@@ -1,0 +1,37 @@
+{% block body %}
+
+	{% for product in pagination %}
+		<a href="{{ path('app_product_details', { id: product.id }) }}" style="text-decoration: none; color: inherit;">
+			<div class="productCard" style="background-color: {{ product.Category.Color }}">
+				<img src="https://cdn.pixabay.com/photo/2014/04/05/09/30/tablet-314153_1280.png" alt"photo" style="width:190px">
+				<h4>{{ product.name }}</h4>
+				<p>{{ product.price }}
+					€</p>
+				<p>
+					{% if product.promotion == 0 %}
+						Non
+					{% elseif product.promotion == 1 %}
+						Oui
+					{% endif %}
+				</p>
+				<p>{{ product.discount }}
+					%</p>
+				{% if app.user %}
+					{% if 'ROLE_ADMIN' in app.user.getRoles() %}
+						<p>
+							<a href="{{ path('app_edit_product', {id: product.id}) }}">Modifier</a>/<a href="{{ path('app_delete_product', {id: product.id}) }}">Supprimer</a>
+						</p>
+					{% endif %}
+				{% endif %}
+				<a href="{{ path('app_cart_add', {id : product.id}) }}" class="btn btn-success float-right">
+					<i class="fas fa-shopping-cart mr-1"></i>
+					Ajouter
+				</a>
+			</div>
+		</a>
+	{% endfor %}
+	<div class="pagination">
+		{{ knp_pagination_render(pagination) }}
+	</div>
+
+{% endblock body %}

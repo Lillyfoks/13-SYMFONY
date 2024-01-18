@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home
+{% endblock %}
+
+{% block body %}
+	<aside>
+        {% include 'category/aside.html.twig' %}
+	</aside>
+
+	<section>
+        <section id="Discount">
+           {% include 'product/carousel.html.twig' %}
+        </section>
+
+        {# <section>
+                {% for product in productsByCategories %}
+                <p>{{product.name}}</p>
+                {% endfor %}
+        </section> #}
+
+        <section id="ProductCards">
+            {% include 'product/productCards.html.twig' %}
+        </section>
+	</section>
+{% endblock %}

@@ -1,0 +1,24 @@
+
+{# templates/cart/validate_cart.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Valider le Panier{% endblock %}
+
+{% block body %}
+    <h1>Valider le Panier</h1>
+
+    <p>Utilisateur : {{ user.firstName }} {{ user.lastName }}</p>
+    <p>Adresse : {{ user.getAdresses()|first.street }}, {{ user.getAdresses()|first.CP }} {{ user.getAdresses()|first.City }}</p>
+
+    {# Affichez les détails du panier ici #}
+    {% for item in cart.items %}
+        <p>Produit : {{ item.product.name }}, Quantité : {{ item.quantity }}, Prix : {{ item.product.price }} €</p>
+    {% endfor %}
+
+    {# Ajoutez d'autres éléments nécessaires pour la validation du panier #}
+
+    {# Ajoutez un formulaire pour la sélection du mode de paiement, etc. #}
+
+    <a href="{{ path('app_confirm_order') }}">Confirmer la commande</a>
+{% endblock %}

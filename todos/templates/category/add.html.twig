@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ 'NewCagory'|trans }}
+{% endblock %}
+
+{% block body %}
+	<nav class="back">
+		<a href="{{ path('app_category') }}">{{ 'Back'|trans }}</a><br>
+	</nav>
+	{{ form(form) }}{% endblock %}

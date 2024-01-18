@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ 'Categories'|trans }}
+{% endblock %}
+
+{% block body %}
+
+	<nav>
+		<a href="{{ path('app_add_category') }}">{{ 'NewCategory'|trans }}</a>
+		<a href="{{ path('app_task') }}">{{ 'Tasks'|trans }}</a>
+	</nav>
+
+	<div class="example-wrapper">
+		{% for category in categories %}
+			<div class="card" style="border: 10px solid {{ category.categoryColor }}">
+				<div class="container">
+					<h1>{{category.name}}</h1>
+					<p>
+						<b>{{ 'TaskName'|trans }}
+							:</b>
+					</p>
+					<ul>
+						{% for task in category.tasks %}
+							<li>{{ task.name }}
+							</li>
+						{% endfor %}
+					</ul>
+					<p>
+						<a href="{{ path('app_edit_category', {id:category.id}) }}">{{ 'Edit'|trans }}
+						</a>
+						/
+						<a href="{{ path('app_delete_category', {id:category.id}) }}">{{ 'Delete'|trans }}</a>
+					</p>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

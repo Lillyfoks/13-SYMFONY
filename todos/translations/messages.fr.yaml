@@ -1,0 +1,66 @@
+# Général
+Welcome: Bienvenue
+Hello : Bonjour
+Homepage : Page d'accueil
+Login : Connexion
+Logout : Déconnexion
+Register : Inscription
+
+
+# Register/login
+lastName : Nom
+firstName : Prénom
+Birthdate : Date de Naissance
+Username : Identifiant
+Password : Mot de Passe
+Repeat  : Mot de passe (vérification)
+Agree  : Accepter les conditions
+SignIn : Connexion
+
+
+# task
+
+Tasks : Tâches
+NewTask : Nouvelle tâche
+Name : Nom
+DueDate : Échéance
+Priority : Priorité
+Category : Catégorie
+Edit : Modifier
+Delete : Supprimer
+Categories : Catégories
+Back : Retour
+CreateTask : Ajouter une tâche
+
+# category
+
+NewCategory : Nouvelle Catégorie
+TaskName : Nom de tâche
+CreateCategory : Ajouter une catégorie
+
+
+# form
+
+Picture : Photo
+
+# mail
+
+subject : Bonjour le monde 
+html : Ceci est un mail
+
+# reset password
+
+forgot : Mot de passe oublié
+reset : Réinitialiser votre mot de passe
+resetButton : Réinitialiser
+small : Entrez votre addresse mail. Nous vous enverrons un lien de réinitialisation
+mailButton : Recevoir un mail de réinitialisation
+p : Pour réinitialiser votre mot de passe, veuillez cliquer sur le lien ci-dessous
+p1 : Ce lien expire dans
+cheers : A bientôt chez Todos
+sent : Mail de réinitialisation envoyé
+Check : Si vous disposez d'un compte, un mail de réinitialisation vous a été envoyé
+pCheck1 : Si vous n'avez rien reçu, vérifiez dans vos indésirables
+tryAgain : Essayez encore
+please : Veuillez entrer votre mail
+new : Nouveau mot de passe

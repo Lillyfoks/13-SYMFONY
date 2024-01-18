@@ -1,0 +1,65 @@
+# Général
+Welcome: Welcome
+Hello : Hello
+Homepage : Homepage
+Login : Login
+Logout : Logout
+Register : Register
+
+
+# Register/login
+lastName : lastName
+firstName : firstName
+Birthdate : Birthdate
+Username : Username
+Password : Password
+Repeat : Repeat Password
+Agree : Agree terms
+SignIn : Sign in
+
+
+# task
+
+Tasks : Tasks
+NewTask : New task
+Name : Name
+DueDate : DueDate 
+Priority : Priority
+Category : Category
+Edit : Edit
+Delete : Delete
+Categories : Categories
+Back : Back
+CreateTask : Add task
+
+# category
+
+NewCategory : New Category
+TaskName : Task's name
+CreateCategory : Add Category
+
+# form
+
+Picture : Photo
+
+# mail
+
+subject : Hello World
+html : This is an email
+
+# reset password
+
+forgot : Forgot Password
+reset : Reset your password
+resetButton : Reset password
+small : Enter your email address, and we will send you a link to reset your password
+mailButton : Send password reset email
+p : To reset your password, please visit the following link
+p1 : This link will expire in
+cheers : Cheers
+sent : Password Reset Email Sent
+pCheck : If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password
+pCheck1 : If you don't receive an email please check your spam folder or
+tryAgain : try again
+please : Please enter your email
+new : New password

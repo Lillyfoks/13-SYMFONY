@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ 'NewTask'|trans }}
+{% endblock %}
+
+{% block body %}
+	<nav class="back">
+		<a href="{{ path('app_task') }}">{{ 'Back'|trans }}</a><br>
+	</nav>
+	{{ form(form) }}{% endblock %}

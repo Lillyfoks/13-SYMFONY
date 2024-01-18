@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Adress{% endblock %}
+
+{% block body %}
+    <h1>Adress</h1>
+
+    {{ form_start(form) }}
+    {{ form_row(form.street) }}
+    {{ form_row(form.CP) }}
+    {{ form_row(form.City) }}
+
+
+    <button type="submit">Submit</button>
+    {{ form_end(form) }}
+{% endblock %}

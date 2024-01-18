@@ -1,0 +1,213 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+}
+
+header {
+    height: 150px;
+    background: linear-gradient(180deg, rgba(34,55,127,0.8), rgba(99,204,247,0.7));
+    text-align: center;
+}
+
+header .name {
+    position: absolute;
+    top: 7%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 80%; /* Ajustez la largeur maximale selon vos besoins */
+}
+
+header .name h1 a {
+    text-decoration: none !important; 
+    color: black; 
+    cursor: pointer; 
+    font-size: 48px;
+}
+
+header .authenticator {
+    width: fit-content;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+#menuOptions {
+    position: absolute;
+    top: 100%;
+    right: 0px; /* Ajustez cette valeur pour décaler le menu à gauche */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    list-style: none;
+    padding: 10px;
+    margin: 0;
+    border-radius: 5px;
+    width: 200px;
+}
+
+#menuOptions li {
+    margin-bottom: 5px;
+}
+
+#menuOptions a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px !important;
+}
+
+#menuOptions a:hover {
+    text-decoration: underline;
+    color: #333;
+}
+
+.hidden {
+    display: none;
+}
+
+.authenticator i {
+    cursor: pointer; 
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: rgba(182, 182, 182, 0.212);
+    min-height: 700px;
+}
+
+aside {
+    width: 15%;
+    padding: 10px;
+    background-color: rgba(161, 161, 161, 0.39);
+    border: 10px solid rgba(0, 0, 0, 0.171);
+}
+
+aside a {
+    text-decoration: none;
+    color: black;
+}
+
+aside a:hover {
+    text-decoration: underline;
+    color: black;
+}
+
+section {
+    width: 90%;
+}
+
+#Discount {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+#carouselExample {
+    width: 700px;
+    height: 400px; 
+}
+
+#carouselExample img {
+    height: 400px; 
+}
+
+#carouselExample .carousel-control-prev-icon,#carouselExample .carousel-control-next-icon, #carouselExample .carousel-control-prev, #carouselExample .carousel-control-next  {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+#ProductCards {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around
+}
+
+.cards {
+    display: flex;
+    flex-direction: row;
+}
+
+.productCard{
+    width: 200px;
+    height: 400px;
+    border: 5px solid black;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.productCard p {
+    font-size: 16px;
+    margin: 10px;
+}
+
+.productCard h4 {
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.form{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    width: 100%;
+}
+
+form {
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+#login {
+    padding: 20px;
+    margin-top: 200px;
+    margin-left: 41%;
+    height: fit-content;
+}
+
+form div {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+div input, div select, div button {
+    width: 300px;
+    text-align: center;
+    align-items: end;
+    background-color: rgba(99,204,247,0.7);
+    border: none;
+    border-radius: 5px;
+}
+
+div button {
+    box-shadow: 5px 5px 5px rgba(34,55,127,0.8);
+}
+
+table {
+    border-collapse: collapse; 
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #dddddd; 
+    padding: 8px; 
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+
+footer {
+    height: 100px;
+    background: linear-gradient(0deg, rgba(34,55,127,0.8), rgba(99,204,247,0.7));
+    text-align: center;
+    padding-top: 30px;
+}
+

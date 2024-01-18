@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello OrderController!{% endblock %}
+
+{% block body %}
+
+{{ form_start(form) }}
+
+<h4> Adressse de livraison </h4>
+{{ form_row(form.adresses) }}
+
+<h4> Mode de transport </h4>
+{# {{ form_row(form.transporteur) }} #}
+{{ form_end(form) }}
+
+{% endblock %}

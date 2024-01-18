@@ -1,0 +1,9 @@
+# config/packages/knp_paginator.yaml
+
+knp_paginator:
+    page_range: 5                  # Nombre de pages affichées dans la barre de pagination
+    default_options:
+        page_name: page            # Nom du paramètre de la page dans l'URL
+        sort_field_name: sort      # Nom du paramètre pour le tri dans l'URL
+        sort_direction_name: order # Nom du paramètre pour la direction de tri dans l'URL
+        distinct: true              # Empêcher la suppression des doublons dans le paginat

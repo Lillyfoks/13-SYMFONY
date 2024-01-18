@@ -1,0 +1,144 @@
+* {
+    font-family: 'Caveat', cursive;
+    font-size: 26px;
+}
+
+body {
+    margin: 0;
+}
+
+header {
+    display: flex;
+    justify-content: right;
+    background-color: rgba(210, 112, 235, 0.425);
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-right: 100px;
+    background-image: url("../images/cat.png");
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: 10%;
+}
+
+main {
+    background-color: rgba(152, 236, 231, 0.425);
+    min-height: 65vh;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    background-image: url("../images/strawberry.png");
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: 60% auto;
+    
+}
+
+nav {
+    background-color: rgba(147, 58, 219, 0.377);
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid black;
+}
+
+
+#avatar {
+    max-width: 20px;
+    border-radius: 100%;
+    border: 10px solid rgb(226, 17, 191);
+}
+
+h1 {
+    color : rgb(228, 73, 202);
+    font-size: 48px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.example-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.card, form {
+    width: 320px;
+    border-radius: 5px;
+    background-color: rgb(255, 246, 114);
+    padding: 15px;
+    box-shadow: 10px 10px 15px rgb(109, 133, 138);
+    margin: 20px !important;
+}
+
+form {
+    margin: 0 !important; 
+    margin-left: 20px !important;
+}
+
+#form_name, #form_description, #form_DueDate, #form_priority, #form_Category, #inputUsername, #inputPassword, #registration_form_brochure, #registration_form_email, #registration_form_lastName, #registration_form_firstName, #registration_form_birthdate, #registration_form_username, #registration_form_password_first, #registration_form_password_second {
+    width: 300px;
+    background-color: rgb(231, 188, 138);
+    border-radius: 5px;
+    padding: 0.2em;
+    border: 0;
+}
+
+#form_save, .btn {
+    margin-top: 15px;
+    background-color: rgb(231, 188, 138);
+    border: 0;
+    border-radius: 5px;
+    padding: 0.4em;
+}
+
+div:has(>#form_save) {
+    display: flex;
+    width: fit-content;
+}
+
+.card, p {
+    height: fit-content;
+    margin: 0;
+}
+
+.card p:last-child {
+    text-align: center;
+}
+
+.container h1 {
+    margin: 0;
+}
+
+
+.card b {
+    text-decoration: underline;
+    color: purple;
+}
+
+.back {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 20px;
+}
+
+footer {
+    background-color: rgba(147, 58, 219, 0.377);
+    padding: 60px !important;
+    background-image: url("../images/meatbun.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 8%;
+}
+
+footer h1 {
+    margin: 0;
+    text-align: left;
+    margin-left: 650px;
+}

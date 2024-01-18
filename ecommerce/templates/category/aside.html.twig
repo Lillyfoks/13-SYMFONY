@@ -1,0 +1,29 @@
+{# templates/category/aside.html.twig #}
+
+{# <div class="input-group rounded">
+	<input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon"/>
+	<span class="input-group-text border-0" id="search-addon">
+		<i class="fas fa-search"></i>
+	</span>
+</div> #}
+
+{{ render(controller(
+        'App\\Controller\\SearchController::searchBar'
+ )) }}
+
+<br>
+<h5>Rechercher par catégorie</h5>
+<ul>
+	{% for category in categories %}
+		<li>
+			<a href="{{ path('app_category_product', {id : category.id}) }}">{{ category.name }}</a>
+			{% if app.user %}
+				{% if 'ROLE_ADMIN' in app.user.getRoles() %}
+					<p>
+						<a href="{{ path('app_edit_category', {id: category.id}) }}">Modifier</a>/<a href="{{ path('app_delete_category', {id: category.id}) }}">Supprimer</a>
+					</p>
+				{% endif %}
+			{% endif %}
+		</li>
+	{% endfor %}
+</ul>
