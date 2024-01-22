@@ -39,7 +39,6 @@ class SearchController extends AbstractController
             ->add('recherche', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-primary',
-                    'style' => 'width: 150px;',
                 ]
             ])
             ->getForm();
@@ -61,11 +60,7 @@ public function handleSearch(Request $request, ProductsRepository $repo)
                 'placeholder' => 'Rechercher'
             ]
         ])
-        ->add('recherche', SubmitType::class, [
-            'attr' => [
-                'class' => 'btn btn-primary'
-            ]
-        ])
+        ->add('recherche', SubmitType::class)
         ->getForm();
 
     $form->handleRequest($request);

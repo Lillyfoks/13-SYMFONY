@@ -37,12 +37,14 @@ class ProductController extends AbstractController
 
         $form = $this->createFormBuilder($product)
             ->add('name', TextType::class, [
+                'label' => 'Nom',
                 'attr' => [
                     'placeholder' => ' ',
                     'required' => true,
                 ],
             ])
             ->add('price', TextType::class, [
+                'label' => 'Prix',
                 'attr' => [
                     'placeholder' => ' ',
                     'required' => true,
@@ -50,13 +52,14 @@ class ProductController extends AbstractController
             ])
             ->add('promotion', ChoiceType::class, [
                 'choices' => [
-                    'Yes' => true,
-                    'No' => false,
+                    'Oui' => true,
+                    'Non' => false,
                 ],
                 'data' => false,
                 'attr' => [],
             ])
             ->add('discount', IntegerType::class, [
+                'label' => 'Remise',
                 'attr' => [
                     'placeholder' => ' ',
                     'required' => true,
@@ -72,11 +75,13 @@ class ProductController extends AbstractController
 
             ->add('Category', EntityType::class, [
                 'class' => Categories::class,
+                'label' => 'Catégorie',
                 'placeholder' => 'Sélectionnez une catégorie',
                 'choice_label' => 'name',
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Add Product',
+                'label' => 'Ajouter un Produit',
+                'attr' => ['class' => 'btn btn-success'],
             ])
             ->getForm();
 
@@ -85,11 +90,6 @@ class ProductController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($product);
             $entityManager->flush();
-
-            // $this->addFlash(
-            //     'success',
-            //     $this->translator->trans('alert.add')
-            // );
 
             return $this->redirectToRoute('app_home');
         }
@@ -112,12 +112,14 @@ class ProductController extends AbstractController
 
         $form = $this->createFormBuilder($product)
             ->add('name', TextType::class, [
+                'label' => 'Nom',
                 'attr' => [
                     'placeholder' => ' ',
                     'required' => true,
                 ],
             ])
             ->add('price', TextType::class, [
+                'label' => 'Prix',
                 'attr' => [
                     'placeholder' => ' ',
                     'required' => true,
@@ -125,13 +127,14 @@ class ProductController extends AbstractController
             ])
             ->add('promotion', ChoiceType::class, [
                 'choices' => [
-                    'Yes' => true,
-                    'No' => false,
+                    'Oui' => true,
+                    'Non' => false,
                 ],
                 'data' => false,
                 'attr' => [],
             ])
             ->add('discount', IntegerType::class, [
+                'label' => 'Remise',
                 'attr' => [
                     'placeholder' => ' ',
                     'required' => true,
@@ -147,11 +150,13 @@ class ProductController extends AbstractController
 
             ->add('Category', EntityType::class, [
                 'class' => Categories::class,
+                'label' => 'Catégorie',
                 'placeholder' => 'Sélectionnez une catégorie',
                 'choice_label' => 'name',
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Modifier',
+                'attr' => ['class' => 'btn btn-success'],
             ])
             ->getForm();
 
@@ -181,5 +186,13 @@ class ProductController extends AbstractController
         $entityManager->remove($product);
         $entityManager->flush();
         return $this->redirectToRoute('app_home');
+    }
+
+    #[Route('/product/{id}', name: 'app_product_details')]
+    public function showProductDetails(int $id, EntityManagerInterface $entityManager): Response
+    {
+        $product = $entityManager->getRepository(Products::class)->findOneBy(['id' => $id]);
+
+        return $this->render('product/details.html.twig', ['product' => $product]);
     }
 }

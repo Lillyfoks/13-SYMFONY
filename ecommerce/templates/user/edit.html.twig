@@ -1,8 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
-{% endblock %}
+{% block title %}{% endblock %}
 
 {% block body %}
-
-	{{ form(form) }}{% endblock %}
+	<main id="mainEditUser">
+		<h1>Modifier mes informations</h1>
+		{{ form(form) }}
+		</main>
+	{% endblock %}

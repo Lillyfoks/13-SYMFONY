@@ -47,11 +47,5 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/product/{id}', name: 'app_product_details')]
-    public function showProductDetails(int $id, EntityManagerInterface $entityManager): Response
-    {
-        $product = $entityManager->getRepository(Products::class)->findOneBy(['id' => $id]);
-
-        return $this->render('product/details.html.twig', ['product' => $product]);
-    }
+    
 }

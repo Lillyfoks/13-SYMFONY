@@ -4,33 +4,39 @@
 {% endblock %}
 
 {% block body %}
-
-	<div>
-		<p>
-			Identité :
-			{{app.user.firstName}}
-			{{app.user.lastName}}
-		</p>
-	</br>
-	<p>
-		Date de Naissance :
-		{{app.user.birthdate|date('d-m-Y')}}
-	</p>
-</br>
-<p>
-	Email :
-	{{app.user.email}}
-</p></br>{% if app.user.getAdresses()|length > 0 %}
-{% set firstAddress = app.user.getAdresses()|first %}
-<p>
-	Adresse :
-	{{ firstAddress.street }},
-	{{ firstAddress.CP }}
-	{{ firstAddress.City }}
-</p></br>
-<a href="{{ path('app_adress') }}">Modifier mon adresse</a></br>
-
-{% else %}<p>
-Vous n'avez pas encore d'adresse.</p></br><a href="{{ path('app_adress') }}">Ajouter une adresse</a></br>{% endif %}
-
-<a href="{{ path('app_edit_user', {id: app.user.id}) }}">Modifier mes informations</a></div>{% endblock %}
+	<main id="mainUser">
+		<h1>Mes informations</h1>
+			<div>
+				<p>
+					<b>Identité :</b>
+					{{app.user.firstName}}
+					{{app.user.lastName}}
+				</p>
+				</br>
+				<p>
+					<b>Date de Naissance :</b>
+					{{app.user.birthdate|date('d-m-Y')}}
+				</p>
+				</br>
+				<p>
+					<b>Email :</b>
+					{{app.user.email}}
+				</p>
+				</br>
+				{% if app.user.getAdresses()|length > 0 %}
+				{% set firstAddress = app.user.getAdresses()|first %}
+					<p>
+						<b>Adresse :</b>
+						{{ firstAddress.street }}
+						{{ firstAddress.CP }}
+						{{ firstAddress.City }}
+					</p>
+					</br>
+					<a href="{{ path('app_adress') }}">Modifier mon adresse</a></br>
+				{% else %}
+					<p><b>Vous n'avez pas encore d'adresse </b><a href="{{ path('app_adress') }}">Ajouter une adresse</a></p></br>
+				{% endif %}
+				<a href="{{ path('app_edit_user', {id: app.user.id}) }}" id="editUser">Modifier mes informations</a>
+			</div>
+	</main>
+{% endblock %}

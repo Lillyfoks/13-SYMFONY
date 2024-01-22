@@ -30,16 +30,18 @@ class CategoryController extends AbstractController
 
         $form = $this->createFormBuilder($category)
             ->add('name', TextType::class, [
+                'label' => 'Nom',
                 'attr' => [
                     'placeholder' => ' ',
                     'required' => true,
                 ],
             ])
             ->add('color', ColorType::class, [
-                'label' => 'Category Color',
+                'label' => 'Couleur',
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Ajouter une Catégorie',
+                'label' => 'Ajouter',
+                'attr' => ['class' => 'btn btn-success'],
             ])
             ->getForm();
 
@@ -57,7 +59,7 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        return $this->render('product/index.html.twig', [
+        return $this->render('category/add.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -75,15 +77,19 @@ class CategoryController extends AbstractController
 
         $form = $this->createFormBuilder($category)
         ->add('name', TextType::class, [
+            'label' => 'Nom',
             'attr' => [
                 'placeholder' => ' ',
                 'required' => true,
             ],
         ])
         ->add('color', ColorType::class, [
-            'label' => 'Category Color',
+            'label' => 'Couleur',
         ])
-        ->add('save', SubmitType::class, ['label' => 'Modifier'])
+        ->add('save', SubmitType::class, [
+            'label' => 'Modifier',
+            'attr' => ['class' => 'btn btn-success'],
+            ])
             ->getForm();
 
         $form->handleRequest($request);

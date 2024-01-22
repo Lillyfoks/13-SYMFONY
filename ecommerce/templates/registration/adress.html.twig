@@ -3,7 +3,8 @@
 {% block title %}Adress{% endblock %}
 
 {% block body %}
-    <h1>Adress</h1>
+<main id="mainAddress">
+    <h1>Adresse</h1>
 
     {{ form_start(form) }}
     {{ form_row(form.street) }}
@@ -11,6 +12,7 @@
     {{ form_row(form.City) }}
 
 
-    <button type="submit">Submit</button>
+    <button type="submit" class="btn btn-success">Enregistrer mon Adresse</button>
     {{ form_end(form) }}
+</main>
 {% endblock %}

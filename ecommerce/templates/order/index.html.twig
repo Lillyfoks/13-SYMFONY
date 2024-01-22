@@ -1,16 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello OrderController!{% endblock %}
 
 {% block body %}
+	<main id="mainOrder">
+		<h1>Confirmation de commande</h1>
 
-{{ form_start(form) }}
+		<p>Merci pour votre commande !</p>
 
-<h4> Adressse de livraison </h4>
-{{ form_row(form.adresses) }}
+		<p>Détails de la commande :</p>
 
-<h4> Mode de transport </h4>
-{# {{ form_row(form.transporteur) }} #}
-{{ form_end(form) }}
+		<ul>
+			{% for orderDetail in order.getOrderDetails() %}
+				<li>{{ orderDetail.getQuantity() }}
+					x
+					{{ orderDetail.getProduct().getName() }}
+					-
+					{{ orderDetail.getPrice() }}
+					€</li>
+			{% endfor %}
+		</ul>
+
+		<p>Total de la commande :
+			{{ order.getTotal() }}
+			€</p>
+
+	</main>
 
 {% endblock %}

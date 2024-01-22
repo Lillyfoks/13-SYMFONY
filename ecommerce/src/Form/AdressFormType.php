@@ -7,17 +7,23 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+
 
 class AdressFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('street')
-        ->add('CP', IntegerType::class, [
-            'label' => 'Post Code',
+        ->add('street', TextType::class, [ 
+            'label' => 'Rue',
         ])
-        ->add('City');
+        ->add('CP', IntegerType::class, [
+            'label' => 'Code Postal',
+        ])
+        ->add('City', TextType::class, [
+            'label' => 'Ville',
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

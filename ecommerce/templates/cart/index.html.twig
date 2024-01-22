@@ -1,28 +1,44 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<h1>Votre panier</h1>
-	{% if items | length >0 %}
-		<form action="{{ path('app_order') }}">
+	<main id="mainCart">
+		<h1>Votre panier</h1>
+		{% if items | length >0 %}
 			<table>
 				<thead>
 					<tr>
 						<th>Produit</th>
 						<th>Prix</th>
-						<th>Quantité</th>
-						<th>Total</th>
-						<th></th>
+						<th colspan="3">Quantité</th>
+						<th colspan="2">Total</th>
 					</tr>
 				</thead>
 				<tbody>
 					{% for item in items %}
 						<tr>
 							<td>{{item.product.name}}</td>
-							<td>{{item.product.price}}€</td>
-							<td>{{item.quantity}}</td>
-							<td>{{item.product.price * item.quantity}}€</td>
 							<td>
-								<a href="{{ path ('app_cart_remove', {id:item.product.id}) }}" class="btn btn-danger btn-sm">
+								{% if item.product.promotion == 1 %}
+									<p style="text-decoration: line-through;">{{ item.product.price }}€</p>
+									<p>{{ (item.product.price * (1 - item.product.discount/100))|round(2, 'floor') }}€</p>
+								{% else %}
+									<p>{{ item.product.price }}€</p>
+								{% endif %}
+							</td>
+							<td>
+								<a href="{{ path ("app_cart_add", {id: item.product.id})}}">
+									<i class="fa-solid fa-plus" style="color: #000000;"></i>
+								</td>
+							</td>
+							<td>{{item.quantity}}</td>
+							<td>
+								<a href="{{ path ("app_cart_remove", {id: item.product.id})}}">
+									<i class="fa-solid fa-minus" style="color: #000000;"></i>
+								</td>
+							</td>
+							<td>{{ (item.product.price * (1 - item.product.discount/100) * item.quantity)|round(2, 'floor')}}€</td>
+							<td>
+								<a href="{{ path ('app_cart_delete', {id:item.product.id}) }}" class="btn btn-danger btn-sm">
 									<i class="fas fa-trash"></i>
 								</td>
 							</td>
@@ -31,16 +47,20 @@
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="3" class="text-right">Total :</td>
-						<td>{{total}}€</td>
 						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>
+							<b>Total</b>
+						</td>
+						<td colspan="2">{{total}}€</td>
 					</tr>
 				</tfoot>
 			</table>
+			<a href="{{ path ('app_add_order') }}" class="btn btn-success">Valider mon panier</a>
 		{% else %}
 			<p>Votre Panier est vide</p>
 		{% endif %}
-
-		<button type="submit">Valider mon panier</button>
-	</form>
+	</main>
 {% endblock %}

@@ -1,21 +1,27 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-<h1>{{category.name}}</h1>
-
-{% for product in products %}
-                <div class="productCard">
-                        <img src="https://cdn.pixabay.com/photo/2014/04/05/09/30/tablet-314153_1280.png" alt"photo" style="width:190px">
-                        <h4>{{ product.name }}</h4>
-                        <p>{{ product.price }}</p>
-                        <p>
-                            {% if product.promotion == 0 %}
-                                Non
-                            {% elseif product.promotion == 1 %}
-                                Oui
-                            {% endif %}
-                        </p>
-                </div>
-            {% endfor %} 
+	<main id="homeProductByCat" style="background-color: {{ category.Color }}">
+		<h1>{{category.name}}</h1>
+		<section id="productByCat">
+			{% for product in products %}
+				<div class="productCard">
+					<img src="https://cdn.pixabay.com/photo/2014/04/05/09/30/tablet-314153_1280.png" alt"photo" style="width:190px">
+					<h4>{{ product.name }}</h4>
+					{% if product.promotion == 1 %}
+						<p>
+							<span style="text-decoration: line-through;">{{ product.price }}€</span>
+							{{ product.price * (1 - product.discount/100) }}€
+						</p>
+					{% else %}
+						<p>{{ product.price }}€</p>
+					{% endif %}
+					<a href="{{ path('app_cart_add', {id : product.id}) }}" class="btn btn-success float-right">
+					<i class="fas fa-shopping-cart mr-1"></i>
+					Ajouter
+				</a>
+				</div>
+			{% endfor %}
+		</section>
+	</main>
 {% endblock %}

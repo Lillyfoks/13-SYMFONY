@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\user;
 use App\Repository\OrderRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -18,7 +19,7 @@ class Order
     #[ORM\ManyToOne(inversedBy: 'orders')]
     private ?user $user = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATE_MUTABLE,)]
     private ?\DateTimeInterface $dDate = null;
 
     #[ORM\ManyToOne(inversedBy: 'orders')]
@@ -51,7 +52,7 @@ class Order
 
     public function setDDate(\DateTimeInterface $dDate): static
     {
-        $this->dDate = $dDate;
+        $this->dDate = $dDate ?? new \DateTime();
 
         return $this;
     }

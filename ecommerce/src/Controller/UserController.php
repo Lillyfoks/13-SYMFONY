@@ -38,16 +38,17 @@ class UserController extends AbstractController
 
         $form = $this->createFormBuilder($user)
         ->add('firstName', TextType::class, [
-            'label' => 'firstName',
+            'label' => 'Prénom',
             'translation_domain' => 'messages'
         ])
         ->add('lastName', TextType::class, [
-            'label' => 'lastName'
+            'label' => 'Nom'
         ])
         ->add('birthdate', BirthdayType::class, [
             'placeholder' => [
                 'year' => 'Year', 'month' => 'Month', 'day' => 'Day',
             ],
+            'label' => 'Date de Naissance',
         ])
         ->add('email')
         ->add('password', RepeatedType::class, [
@@ -55,12 +56,13 @@ class UserController extends AbstractController
             'invalid_message' => 'The password fields must match.',
             'options' => ['attr' => ['class' => 'password-field']],
             'required' => true,
-            'first_options'  => ['label' => 'Password'],
-            'second_options' => ['label' => 'Repeat Password'],
+            'first_options'  => ['label' => 'Mot de Passe'],
+            'second_options' => ['label' => 'Répéter Mot de Passe'],
         ])
 
         ->add('submit', SubmitType::class, [
             'label' => 'Modifier',
+            'attr' => ['class' => 'btn btn-success'],
         ])
             ->getForm();
 

@@ -1,16 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-<h4>{{product.name}}</h4></br>
-<p>{{ product.price }}€</p></br>
-<p>
-	{% if product.promotion == 0 %}
-		Non
-	{% elseif product.promotion == 1 %}
-		Oui
-	{% endif %}
-</p></br>
-<p>{{ product.discount }}</p>
-
-{% endblock body %}
+<main id="productHome" style="background-color: {{ product.Category.Color }}">
+	<h4>{{product.name}}</h4>
+</br>
+{% if product.promotion == 1 %}
+	<p>
+		<span style="text-decoration: line-through;">{{ product.price }}€</span>
+		{{ product.price * (1 - product.discount/100) }}€
+	</p>
+{% else %}
+	<p>{{ product.price }}€</p>
+{% endif %}
+<a href="{{ path('app_cart_add', {id : product.id}) }}" class="btn btn-success">
+	<i class="fas fa-shopping-cart mr-1"></i>
+	Ajouter
+</a>
+</main>{% endblock body %}
