@@ -58,9 +58,10 @@
 					</tr>
 				</tfoot>
 			</table>
-			<a href="{{ path ('app_add_order') }}" class="btn btn-success">Valider mon panier</a>
+			<a href="{{ path ('app_stripe') }}" class="btn btn-success">Valider mon panier</a>
 		{% else %}
 			<p>Votre Panier est vide</p>
+			<a href="{{ path ('app_home') }}">Ajouter des produits</a>
 		{% endif %}
 	</main>
 {% endblock %}

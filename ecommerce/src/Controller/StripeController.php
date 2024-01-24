@@ -3,6 +3,8 @@
 namespace App\Controller;
  
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use App\Repository\ProductsRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,12 +22,23 @@ class StripeController extends AbstractController
  
  
     #[Route('/stripe/create-charge', name: 'app_stripe_charge', methods: ['POST'])]
-    public function createCharge(Request $request)
+    public function createCharge(Request $request, SessionInterface $session, ProductsRepository $productsRepository)
     {
+
+        $panier = $session->get('panier', []);
+
+        // Calculer le montant total du panier
+        $totalAmount = 0;
+        foreach ($panier as $item => $quantity) {
+        // Utilisez votre repository pour récupérer le prix du produit (à adapter selon votre code)
+        $product=$productsRepository->find($item);
+        $totalAmount += $product->getPrice() * $quantity;
+    }
+
         Stripe\Stripe::setApiKey($_ENV["STRIPE_SECRET"]);
         Stripe\Charge::create ([
-                "amount" => 5 * 100,
-                "currency" => "usd",
+                "amount" => $totalAmount,
+                "currency" => "eur",
                 "source" => $request->request->get('stripeToken'),
                 "description" => "Binaryboxtuts Payment Test"
         ]);

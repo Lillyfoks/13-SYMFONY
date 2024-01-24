@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Adress{% endblock %}
+
 
 {% block body %}
 <main id="mainAddress">
@@ -14,5 +14,6 @@
 
     <button type="submit" class="btn btn-success">Enregistrer mon Adresse</button>
     {{ form_end(form) }}
+    <a href="{{ path('app_user', {id: app.user.id}) }}">Retour</a>
 </main>
 {% endblock %}

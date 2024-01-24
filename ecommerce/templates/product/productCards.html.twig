@@ -3,7 +3,7 @@
 	{% for product in pagination %}
 		<a href="{{ path('app_product_details', { id: product.id }) }}" style="text-decoration: none; color: inherit;">
 			<div class="productCard" style="background-color: {{ product.Category.Color }}">
-				<img src="https://cdn.pixabay.com/photo/2014/04/05/09/30/tablet-314153_1280.png" alt"photo" style="width:190px">
+				<img src="{{ asset('uploads/products/' ~ product.brochureFilename) }}" alt="Image" style="max-width:190px">
 				<h4>{{ product.name }}</h4>
 				{% if product.promotion == 1 %}
 					<p>

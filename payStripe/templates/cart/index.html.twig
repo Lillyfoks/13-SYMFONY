@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div>
+		<h1>Panier</h1>
+	</div>
+	{% if items | length > 0 %}
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Produit</th>
+					<th>Prix</th>
+					<th>Quantité</th>
+					<th>Total</th>
+					<th colspan="2">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for item in items %}
+					<tr>
+						<td>{{item.product.name}}</td>
+						<td>{{item.product.price}}€</td>
+						<td>{{item.quantity}}</td>
+						<td>{{item.product.price * item.quantity}}€</td>
+						<td>
+							<a href="{{ path ("cart_add", {id: item.product.id})}}">
+								<i class="fa-solid fa-plus" style="color: #000000;"></i><br>
+								<a href="{{ path ("app_cart_remove", {id: item.product.id})}}">
+									<i class="fa-solid fa-minus" style="color: #000000;"></i>
+								</td>
+								<td>
+									<a href="{{ path ('app_cart_delete', {id:item.product.id}) }}" class="btn btn-danger btn-sm">
+										<i class="fas fa-trash"></i>
+									</td>
+								</td>
+							</tr>
+						{% endfor %}
+					</tr>
+				</tbody>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="4" class="text-end">
+						<b>Total :</b>
+					</td>
+					<td>{{total}}€</td>
+					<td></td>
+				</tr>
+			</tfoot>
+		</table>
+
+
+
+		<a href="{{ path ('app_address')}}" class="btn btn-success">Ajouter une adresse</a>
+		<a href="{{ path ('app_order')}}" class="btn btn-success">Valider mon panier</a>
+		{# {{ path ('app_stripe') }} #}
+	{% else %}
+		<p>vide</p>
+	{% endif %}
+{% endblock %}

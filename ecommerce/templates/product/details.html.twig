@@ -1,19 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<main id="productHome" style="background-color: {{ product.Category.Color }}">
-	<h4>{{product.name}}</h4>
-</br>
-{% if product.promotion == 1 %}
-	<p>
-		<span style="text-decoration: line-through;">{{ product.price }}€</span>
-		{{ product.price * (1 - product.discount/100) }}€
-	</p>
-{% else %}
-	<p>{{ product.price }}€</p>
-{% endif %}
-<a href="{{ path('app_cart_add', {id : product.id}) }}" class="btn btn-success">
-	<i class="fas fa-shopping-cart mr-1"></i>
-	Ajouter
-</a>
-</main>{% endblock body %}
+	<main id="productHome" style="background-color: {{ product.Category.Color }}">
+		<h4>{{product.name}}</h4>
+	</br>
+	<img src="{{ asset('uploads/products/' ~ product.brochureFilename) }}" alt="Image" style="width:600px">
+	{% if product.promotion == 1 %}
+		<p>
+			<span style="text-decoration: line-through;">{{ product.price }}€</span>
+			{{ product.price * (1 - product.discount/100) }}€
+		</p>
+	{% else %}
+		<p><b>{{ product.price }}€</b></p>
+	{% endif %}
+	<a href="{{ path('app_cart_add', {id : product.id}) }}" class="btn btn-success">
+		<i class="fas fa-shopping-cart mr-1"></i>
+		Ajouter
+	</a>
+</br></br><a href="{{ path ('app_home') }}">Retour à l'Accueil</a></main>{% endblock body %}

@@ -34,6 +34,21 @@ class Products
     #[ORM\ManyToMany(targetEntity: OrderDetails::class, mappedBy: 'product')]
     private Collection $orderDetails;
 
+    #[ORM\Column(type: 'string')]
+    private string $brochureFilename;
+
+    public function getBrochureFilename(): string
+    {
+        return $this->brochureFilename;
+    }
+
+    public function setBrochureFilename(string $brochureFilename): self
+    {
+        $this->brochureFilename = $brochureFilename;
+
+        return $this;
+    }
+
     public function __construct()
     {
         $this->orderDetails = new ArrayCollection();

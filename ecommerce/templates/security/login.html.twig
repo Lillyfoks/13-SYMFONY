@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!
-{% endblock %}
+
 
 {% block body %}
 	<main id="mainLogin">
@@ -22,5 +21,6 @@
 				Connexion
 			</button>
 		</form>
+		<a href="{{ path ('app_home') }}">Retour à l'Accueil</a>
 	</main>
 {% endblock %}

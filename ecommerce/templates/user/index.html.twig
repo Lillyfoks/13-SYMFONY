@@ -1,8 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello UserController!
-{% endblock %}
-
 {% block body %}
 	<main id="mainUser">
 		<h1>Mes informations</h1>
@@ -32,11 +29,12 @@
 						{{ firstAddress.City }}
 					</p>
 					</br>
-					<a href="{{ path('app_adress') }}">Modifier mon adresse</a></br>
+					<a href="{{ path('app_adress_edit') }}">Modifier mon adresse</a></br>
 				{% else %}
 					<p><b>Vous n'avez pas encore d'adresse </b><a href="{{ path('app_adress') }}">Ajouter une adresse</a></p></br>
 				{% endif %}
 				<a href="{{ path('app_edit_user', {id: app.user.id}) }}" id="editUser">Modifier mes informations</a>
 			</div>
+			<a href="{{ path ('app_home') }}">Retour à l'Accueil</a>
 	</main>
 {% endblock %}

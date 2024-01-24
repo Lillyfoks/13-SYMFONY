@@ -1,19 +1,26 @@
 {# templates/product/discount.html.twig #}
 
 <div id="carouselExample" class="carousel slide">
-    <div class="carousel-inner">
-        {% for product in products|filter(product => product.promotion == 1) %}
-    <div class="carousel-item {% if loop.first %}active{% endif %}">
-        <img src="..." class="d-block w-100" alt="{{ product.name }}">
-    </div>
-{% endfor %}
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
+	<div class="carousel-inner">
+		{% for product in products|filter(product => product.promotion == 1) %}
+			<div class="carousel-item {% if loop.first %}active{% endif %}">
+				<img src="{{ asset('uploads/products/' ~ product.brochureFilename) }}" alt="Image">
+				<div class="carousel-caption d-none d-md-block">
+					<h5>{{ product.name }}</h5>
+					<p>
+						<span style="text-decoration: line-through;">{{ product.price }}€</span>
+						{{ (product.price * (1 - product.discount/100))|round(2, 'floor') }}€
+					</p>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+	<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		<span class="visually-hidden">Previous</span>
+	</button>
+	<button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+		<span class="carousel-control-next-icon" aria-hidden="true"></span>
+		<span class="visually-hidden">Next</span>
+	</button>
 </div>

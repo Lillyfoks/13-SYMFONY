@@ -2,10 +2,8 @@
 
 namespace App\Entity;
 
-
+use App\Entity\Products;
 use App\Repository\OrderDetailsRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: OrderDetailsRepository::class)]
@@ -16,11 +14,14 @@ class OrderDetails
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToMany(targetEntity: Products::class, inversedBy: 'orderDetails')]
-    private Collection $product;
+    /**
+     * @ORM\ManyToOne(targetEntity=Product::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private ?Products $product = null;
 
-    #[ORM\OneToOne(inversedBy: 'orderDetails', cascade: ['persist', 'remove'])]
-    private ?order $orderRef = null;
+    #[ORM\ManyToOne(inversedBy: 'orderDetails')]
+    private ?Order $orderRef = null;
 
     #[ORM\Column]
     private ?int $quantity = null;
@@ -31,46 +32,29 @@ class OrderDetails
     #[ORM\Column]
     private ?float $TotalPrice = null;
 
-    public function __construct()
-    {
-        $this->product = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return Collection<int, Products>
-     */
-    public function getProduct(): Collection
+    public function getProduct(): ?Products
     {
         return $this->product;
     }
 
-    public function addProduct(Products $product): static
+    public function setProduct(?Products $product): self
     {
-        if (!$this->product->contains($product)) {
-            $this->product->add($product);
-        }
+        $this->product = $product;
 
         return $this;
     }
 
-    public function removeProduct(Products $product): static
-    {
-        $this->product->removeElement($product);
-
-        return $this;
-    }
-
-    public function getOrderRef(): ?order
+    public function getOrderRef(): ?Order
     {
         return $this->orderRef;
     }
 
-    public function setOrderRef(?order $orderRef): static
+    public function setOrderRef(?Order $orderRef): self
     {
         $this->orderRef = $orderRef;
 
@@ -82,7 +66,7 @@ class OrderDetails
         return $this->quantity;
     }
 
-    public function setQuantity(int $quantity): static
+    public function setQuantity(int $quantity): self
     {
         $this->quantity = $quantity;
 
@@ -94,7 +78,7 @@ class OrderDetails
         return $this->price;
     }
 
-    public function setPrice(float $price): static
+    public function setPrice(float $price): self
     {
         $this->price = $price;
 
@@ -106,10 +90,15 @@ class OrderDetails
         return $this->TotalPrice;
     }
 
-    public function setTotalPrice(float $TotalPrice): static
+    public function setTotalPrice(float $TotalPrice): self
     {
         $this->TotalPrice = $TotalPrice;
 
         return $this;
+    }
+
+    public function calculateTotalPrice(): void
+    {
+        $this->TotalPrice = $this->getPrice() * $this->getQuantity();
     }
 }

@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+	<div class="products">
+		{% for product in products %}
+			<div class="product">
+				<h5>{{product.name}}</h5>
+				<p>{{product.price}}€</p>
+                <a href="{{ path('cart_add', {'id':product.id}) }}" id="cart"><i class="fa-solid fa-cart-shopping" style="color: #000000;"></i></a>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

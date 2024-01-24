@@ -1,10 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% endblock %}
-
 {% block body %}
 	<main class="mainEditAddProductCategory">
 		<h1>Produit</h1>
 		{{ form(form) }}
+			<a href="{{ path ('app_home') }}">Retour à l'Accueil</a>
 		</main>
 	{% endblock %}

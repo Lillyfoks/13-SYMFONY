@@ -11,19 +11,25 @@
 
 		<ul>
 			{% for orderDetail in order.getOrderDetails() %}
-				<li>{{ orderDetail.getQuantity() }}
+				<li>
+					{{ orderDetail.getQuantity() }}
 					x
 					{{ orderDetail.getProduct().getName() }}
 					-
 					{{ orderDetail.getPrice() }}
-					€</li>
+					€
+					{{ orderDetail.getTotalPrice() }}
+					€
+				</li>
 			{% endfor %}
 		</ul>
 
+
 		<p>Total de la commande :
-			{{ order.getTotal() }}
+			{{ order.getOrderDetails.getTotalPrice() }}
 			€</p>
 
+		<a href="{{ path ('app_home') }}">Retour à l'Accueil</a>
 	</main>
 
 {% endblock %}

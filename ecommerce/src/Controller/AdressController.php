@@ -38,4 +38,33 @@ class AdressController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+
+    #[Route('/adress/edit', name: 'app_adress_edit')]
+    public function edit(EntityManagerInterface $entityManager, Request $request): Response
+    {
+        // Récupérez l'utilisateur actuel
+        $user = $this->getUser();
+
+        $adress = $entityManager->getRepository(Adresses::class)->find($user);
+    
+        if (!$adress) {
+            throw $this->createNotFoundException('Adresse non trouvée');
+        }
+    
+        $adress->setUser($user);
+    
+        $form = $this->createForm(AdressFormType::class, $adress);
+        $form->handleRequest($request);
+    
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($adress);
+            $entityManager->flush();
+    
+            return $this->redirectToRoute('app_user');
+        }
+    
+        return $this->render('registration/adress.html.twig', ['form' => $form->createView()]);
+    }
+    
 }

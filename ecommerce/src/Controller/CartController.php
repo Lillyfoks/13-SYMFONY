@@ -78,7 +78,7 @@ class CartController extends AbstractController
     }
 
     #[Route('/cart/delete/{id}', name: 'app_cart_delete')]
-    public function dete(int $id, SessionInterface $session)
+    public function delete(int $id, SessionInterface $session)
     {
         $panier = $session->get('panier', []);
 

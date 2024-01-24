@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello StripeController!{% endblock %}
+
 
 {% block body %}
 <div class="container">
@@ -28,7 +28,7 @@
                                 class="btn btn-success mt-3"
                                 type="button"
                                 style="margin-top: 20px; width: 100%;padding: 7px;"
-                                onclick="createToken()">PAY $5
+                                onclick="createToken()">PAY
                             </button>
                         <form>
                     </div>
@@ -62,4 +62,5 @@
             });
         }
     </script>
+    <a href="{{ path ('app_home') }}">Annuler</a>
 {% endblock %}

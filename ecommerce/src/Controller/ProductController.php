@@ -14,6 +14,10 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class ProductController extends AbstractController
 {
@@ -31,7 +35,7 @@ class ProductController extends AbstractController
 
 
     #[Route('/product/add', name: 'app_add_product')]
-    public function addproduct(Request $request, EntityManagerInterface $entityManager): Response
+    public function addproduct(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $product = new Products();
 
@@ -68,10 +72,30 @@ class ProductController extends AbstractController
                 'data' => 0,
             ])
 
-            // ->add('file', FileType::class, [
-            //     'label' => 'Upload file',
-            //     'required' => false,
-            // ])
+            ->add('brochure', FileType::class, [
+                'label' => 'Picture',
+
+                // unmapped means that this field is not associated to any entity property
+                'mapped' => false,
+
+                // make it optional so you don't have to re-upload the PDF file
+                // every time you edit the Product details
+                'required' => false,
+
+                // unmapped fields can't define their validation using attributes
+                // in the associated entity, so you can use the PHP constraint classes
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'application/pdf',
+                            'application/x-pdf',
+                            'image/jpeg'
+                        ],
+                        'mimeTypesMessage' => 'Please upload a valid document',
+                    ])
+                ],
+            ])
 
             ->add('Category', EntityType::class, [
                 'class' => Categories::class,
@@ -88,6 +112,30 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $brochureFile = $form->get('brochure')->getData();
+
+            // this condition is needed because the 'brochure' field is not required
+            // so the PDF file must be processed only when a file is uploaded
+            if ($brochureFile) {
+                $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$brochureFile->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $brochureFile->move(
+                        $this->getParameter('brochures_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                // updates the 'brochureFilename' property to store the PDF file name
+                // instead of its contents
+                $product->setBrochureFilename($newFilename);
+            }
             $entityManager->persist($product);
             $entityManager->flush();
 
@@ -100,7 +148,7 @@ class ProductController extends AbstractController
     }
 
     #[Route('/product/edit/{id}', name: 'app_edit_product')]
-    public function edit(EntityManagerInterface $entityManager, Request $request, int $id): Response
+    public function edit(EntityManagerInterface $entityManager, Request $request, int $id, SluggerInterface $slugger): Response
     {
         $product = $entityManager->getRepository(Products::class)->find($id);
 
@@ -143,11 +191,31 @@ class ProductController extends AbstractController
                 'data' => 0,
             ])
 
-            // ->add('file', FileType::class, [
-            //     'label' => 'Upload file',
-            //     'required' => false,
-            // ])
+            ->add('brochure', FileType::class, [
+                'label' => 'Picture',
 
+                // unmapped means that this field is not associated to any entity property
+                'mapped' => false,
+
+                // make it optional so you don't have to re-upload the PDF file
+                // every time you edit the Product details
+                'required' => false,
+
+                // unmapped fields can't define their validation using attributes
+                // in the associated entity, so you can use the PHP constraint classes
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'application/pdf',
+                            'application/x-pdf',
+                            'image/png',
+                            'image/jpeg'
+                        ],
+                        'mimeTypesMessage' => 'Please upload a valid document',
+                    ])
+                ],
+            ])
             ->add('Category', EntityType::class, [
                 'class' => Categories::class,
                 'label' => 'Catégorie',
@@ -162,6 +230,31 @@ class ProductController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $brochureFile = $form->get('brochure')->getData();
+
+            // this condition is needed because the 'brochure' field is not required
+            // so the PDF file must be processed only when a file is uploaded
+            if ($brochureFile) {
+                $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$brochureFile->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $brochureFile->move(
+                        $this->getParameter('brochures_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                // updates the 'brochureFilename' property to store the PDF file name
+                // instead of its contents
+                $product->setBrochureFilename($newFilename);
+            }
             // $form->getData() holds the submitted values
             // but, the original `$task` variable has also been updated
             $product = $form->getData();
